@@ -20,10 +20,9 @@ type HomePageData = {
 export default function Home() {
   const [data, setData] = useState<HomePageData | null>(null);
   const [openItemId, setOpenItemId] = useState<number | null>(0);
-
+  const baseUrl: string = process.env.NEXT_PUBLIC_API_URL || "";
   useEffect(() => {
-    axios.get("http://localhost:1337/api/main?populate=items").then((res) => {
-      console.log(res);
+    axios.get(`${baseUrl}/api/main?populate=items`).then((res) => {
       const { pageTitle, items, pageSubtitle, pageDesc } = res.data.data;
       setData({ pageTitle, items, pageSubtitle, pageDesc });
     });
